@@ -1,0 +1,98 @@
+Q1) explaination
+This query finds customers who had more than 3 late payments in the last 6 months. It selects each customer’s ID, 
+counts their late payments from the transactions table in the recent 6-month window, groups by customer, and shows only those with a count greater than 3.
+
+SELECT customer_id, COUNT(*) AS late_payments
+FROM transactions
+WHERE payment_status='late' 
+  AND payment_date > DATE_SUB(CURDATE(), INTERVAL 6 MONTH)
+GROUP BY customer_id
+HAVING late_payments > 3;
+
+### chatgpt link --- https://chatgpt.com/c/68e941b5-db3c-8321-92ec-4d135965bb6a in end for deep and doubts ###
+
+p1)SELECT customer_id, COUNT(*) AS late_payments
+
+“I’m asking for two columns: the customer’s ID and a count of how many matching rows (late payments) they have. 
+I name that count late_payments so the result is readable.”
+
+p2) FROM transactions
+
+“All data comes from the transactions table — each row
+
+p3)WHERE payment_status='late'
+
+“I filter to only include rows where the payment was recorded as late — we don’t want on-time transactions.”
+
+p4)AND payment_date > DATE_SUB(CURDATE(), INTERVAL 6 MONTH)
+
+“I further restrict to payments that happened after the date six months ago — so we focus on recent behavior, not old history.”
+
+p5)GROUP BY customer_id
+
+“Since we want a count per customer, I group all transactions that belong to the same customer_id so the COUNT(*) gives each customer’s total late payments.”
+
+p6) HAVING late_payments > 3
+
+“HAVING filters the grouped results. Here I keep only customers whose late_payments count is greater than 3 — i.e., repeat offenders in that 6-month window.”
+
+p7)Final result (plain):
+
+“The output lists customers who were late more than three times in the last six months, along with how many late payments each had.”
+
+
+2) top 5 high spent 
+explintion :
+This query finds the top 5 customers who spent the most in the last 6 months based on their total transaction amount.”
+
+FROM clause
+
+FROM transactions
+
+This specifies the table we are using, which is the transactions table containing all customer transactions.
+
+WHERE clause
+
+WHERE transaction_date > DATE_SUB(CURDATE(), INTERVAL 6 MONTH)
+
+Filters transactions only from the last 6 months.
+
+CURDATE() returns today’s date.
+
+DATE_SUB(..., INTERVAL 6 MONTH) subtracts 6 months from today.
+
+So only transactions after that date are considered.
+
+SELECT clause with aggregation
+
+SELECT customer_id, SUM(transaction_amount) AS total_amount
+
+For each customer, we calculate the total transaction amount using SUM().
+
+We also select customer_id to know which customer the total belongs to.
+
+AS total_amount gives a name to the calculated sum for readability.
+
+GROUP BY clause
+
+GROUP BY customer_id
+
+Aggregation functions like SUM() require grouping.
+
+Here, we group all transactions by customer so that we can sum each customer’s transactions separately.
+
+ORDER BY clause
+
+ORDER BY total_amount DESC
+
+Sorts the results in descending order by total transaction amount.
+
+The customer with the highest total comes first.
+
+LIMIT clause
+
+LIMIT 5
+
+Returns only the top 5 customers from the sorted list.
+
+This ensures we get only the customers who spent the most.
