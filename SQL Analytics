@@ -96,3 +96,51 @@ LIMIT 5
 Returns only the top 5 customers from the sorted list.
 
 This ensures we get only the customers who spent the most.
+
+
+3) Rank customers by total amount per city
+
+SELECT customer_id, city, SUM(amount) AS total_amount,
+       RANK() OVER(PARTITION BY city ORDER BY SUM(amount) DESC) AS city_rank
+FROM transactions
+GROUP BY customer_id, city;
+
+In short:
+“This query calculates the total transaction amount for each customer in each city, then uses a window function to rank the customers within 
+their city based on spend. PARTITION BY city resets the ranking for each city, and ORDER BY 
+SUM(amount) DESC ensures the highest spenders get rank 1. This helps identify top customers in every city for marketing or rewards programs.”
+----
+By observing this question, 
+I understood that it calculates the total transaction amount for each customer in each city.
+
+We select customer_id to identify each individual customer and city because we want the ranking within each city.
+
+SUM(amount) AS total_amount calculates the total spend per customer and renames it as total_amount for clarity.
+
+RANK() OVER(PARTITION BY city ORDER BY SUM(amount) DESC) AS city_rank ranks customers in descending order of total spend within each city,
+so the highest spender gets rank 1.
+
+FROM transactions specifies the table we are using, and GROUP BY customer_id, 
+city is required to aggregate the amounts per customer in each city before applying the ranking.”
+
+
+dt
+The window function (RANK() OVER(PARTITION BY city …)) doesn’t rank all customers together—it ranks them separately within each city.
+Just saying “rank them” could be interpreted as ranking across all cities, which is not correct.
+
+## PARTITION BY city means we calculate ranks separately for each city.
+PARTITION BY is used in SQL window functions to divide the dataset into separate “partitions” (groups) before performing calculations like 
+RANK(), ROW_NUMBER(), SUM(), etc.
+
+ORDER BY SUM(amount) DESC → Ranks customers highest spender first.
+
+## GROUP BY customer_id, city
+We calculate the total transaction amount per customer in each city.
+Without grouping, SUM(amount) wouldn’t work for each customer individually.
+
+FROM transactions
+
+We are using the transactions table containing all customer transactions.
+
+Goal of the query
+“This query ranks customers within each city based on their total transaction amount.”
