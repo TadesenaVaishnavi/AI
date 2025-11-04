@@ -1,0 +1,20 @@
+What is an RNN? RNN = Recurrent Neural Network
+----
+An RNN is a type of neural network designed to process sequential data.
+Input → [RNN Cell] → Output
+           ↑
+ Hidden State (Memory)
+What is Sequential Data?
+Sequential data is data that has a specific order, and the order is important.
+Examples:
+ Text (sequence of words)
+ Speech (sequence of sounds)
+ Stock prices (sequence over time)
+ Video frames (sequence of images)
+ Sensor data (from smart devices over time)
+
+Backpropagation Through Time (BPTT)
+----
+It is the training method used to update the weights of an RNN
+sentence: I like deep learning
+The RNN sees one word at a time: First: "I" Then: "like" Then: "deep" Then: "learning"
