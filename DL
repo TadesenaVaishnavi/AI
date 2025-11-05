@@ -1,3 +1,74 @@
+**Computer Vision** 
+is a field of AI that enables computers to **see, understand, and interpret(analysis) images or videos like humans do.**
+
+What is a CNN?
+-----
+A Convolutional Neural Network (CNN) is a type of deep learning model that is very good at 
+looking at pictures and understanding what's inside.
+Just like humans use their eyes and brain to recognize objects (like cats, cars, or people), 
+CNNs help computers recognize things in images.
+
+CNN is like a brain for images. It helps computers see and understand pictures — whether 
+it’s a photo of a cat, an X-ray, or a traffic light. Today, CNNs are used everywhere: phones, 
+hospitals, cars, and more!
+
+4 main steps
+~~~~
+Convolution Layer (Feature Detector) - This layer looks at small parts of the image, like checking for edges, corners, or 
+colors.
+It uses something called filters to find these features.
+ Example: Detects the edge of a cat’s ear or the corner of a box
+
+ReLU Layer (Activator)
+After finding features, it removes all negative values.
+ This helps the network focus only on the useful information.
+
+Pooling Layer (Compressor)
+t shrinks the image, keeping only the important parts.
+ Helps reduce memory and makes the system faster.
+ Think of it like zooming out a bit to see the big pictur
+
+Fully Connected Layer (Decision Maker )
+It takes all the information found and makes the final decision.
+ Example: “Yes, this is a cat (or) NO
+Applications:
+Image Classification - It says what is in the image.
+Object Detection - Finds where the object is in the image.
+Image Segmentation - Colors each part of the image with a label(assign a name).
+Medical Imaging
+Self-Driving Cars
+use
+~~~
+CNN learns automatically.
+It works faster and better than old methods.
+It remembers patterns in images just like we do.
+
+Normalization
+------------
+Type(BLWSI^2)
+~~~~
+Batch Normalization
+Layer Normalization
+Instance Normalization
+Group Normalization
+Weight Normalization
+Spatial Normalization
+
+**Batch Normalization** – Normalizes the data for each layer using the average and variance of the current batch to make training faster and more stable.
+
+**Layer Normalization** – Normalizes all the neurons in a single layer for each data point, helping especially in recurrent or transformer models.
+
+**Instance Normalization** – Normalizes each image (or instance) separately, often used in style transfer tasks.
+
+**Group Normalization** – Divides channels into small groups and normalizes each group, useful when batch size is small.
+
+**Weight Normalization** – Normalizes the weights of neurons instead of the inputs to make learning more efficient.
+
+**Spatial Normalization** – Normalizes over spatial dimensions (height and width) to balance brightness or contrast across images.
+
+
+
+
 What is an RNN? RNN = Recurrent Neural Network
 ----
 An RNN is a type of neural network designed to process sequential data.
